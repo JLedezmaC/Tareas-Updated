@@ -21,25 +21,25 @@ const formulario = document.getElementById('new-task-form');
 
 //Constante de checkbox
 
-const complete1 = document.getElementById('hide-completed');
 //
 // Funciones.
 //
 
+const complete1 = document.getElementById('hide-completed');
+complete1.addEventListener('click',(event) =>{
+  const status = event.currentTarget.checked;
+  const incompleta = tareas.filter((tarea)=>{
+    return !tarea.complete;
+  })
+  if(status === true){
+    refreshTasksDOM(incompleta);
+  }else{
+    refreshTasksDOM(tareas);
+  }
+})
+
 // MODELO - taskStatus(): Actualiza el estado de una tarea.
 function taskStatus(id, complete) {
-  complete1.addEventListener('click',(event) =>{
-    const status = event.currentTarget.checked;
-    const incompleta = tareas.filter((tarea)=>{
-      return !tarea.complete;
-    })
-    if(status == true){
-      incompleta.style.display ='block';
-      tareas.style.display = 'none';
-    }else{
-      tareas.style.display = 'block';
-    }
-  })
   const tareaEncontrada = tareas.find((tarea) => tarea._id === id);
   if (tareaEncontrada) {
     tareaEncontrada.complete = complete;
